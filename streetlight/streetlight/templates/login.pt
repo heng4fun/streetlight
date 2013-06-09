@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login-StreetLight Manager System</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  <meta name="keywords" content="python web application" />
+  <meta name="description" content="pyramid web application" />
+  <link rel="shortcut icon"
+        href="${request.static_url('streetlight:static/favicon.ico')}" />
+  <link rel="stylesheet"
+        href="${request.static_url('streetlight:static/pylons.css')}"
+        type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <script src="${request.static_url('streetlight:static/jquery.js')}"></script>
+  <script src="${request.static_url('streetlight:static/bootstrap.min.js')}"></script>
+</head>
+<body>
+  <div id="wrap">
+    <div id="top-small">
+      <div class="top-small align-center">
+        <div>
+          <img width="220" height="50" alt="pyramid"
+        src="${request.static_url('streetlight:static/pyramid-small.png')}" />
+        </div>
+      </div>
+    </div>
+    <div id="middle">
+      <div class="middle align-right">
+        <div id="left" class="app-welcome align-left">
+          <span tal:condition="fail_message">帐号密码不匹配或权限不足</span>
+        </div>
+        <div id="right" class="app-welcome align-right"></div>
+      </div>
+    </div>
+    <div id="bottom">
+      <div class="bottom">
+       
+     <div class="container">
+       <form class="form-signin"  action="${login_url}" method="post">
+       <input type="hidden" name="came_from" value="${came_from}"/>
+        <h2 class="form-signin-heading">登录</h2>
+        <input type="text"  placeholder="用户名" name="login" value="${login}"><br />
+        <input type="password"  placeholder="密码" name="password" value="${password}"><br />
+        
+        <input type="submit" class="btn btn-large btn-primary" name="form.submitted" value="登录" />
+      </form>
+    </div>
+       
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="footer"
+         >&copy; Copyright 2008-2013,JeremyHuang Consulting.</div>
+  </div>
+</body>
+</html>

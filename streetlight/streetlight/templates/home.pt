@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Pyramid Web Application Development Framework</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  <meta name="keywords" content="python web application" />
+  <meta name="description" content="pyramid web application" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap-responsive.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <script src="${request.static_url('streetlight:static/jquery.js')}"></script>
+  <script src="${request.static_url('streetlight:static/bootstrap.min.js')}"></script>
+<style type="text/css">
+   /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 20px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 20px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+
+    /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 60px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-top: 100px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }
+ 
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="${home_url}">城市路灯管理系统</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="${home_url}">首页</a></li>
+                <li><a href="${view_url}">查看&搜索</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理 <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">管理员</li>
+                    <li><a href="${admin_url}">查看所有管理员</a></li>
+                    <li><a href="${add_admin_url}">添加管理员</a></li>
+                    <li><a href="${edit_admin_url}">修改账户信息</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">路灯</li>
+                    <li><a href="${add_streetlight_url}">添加路灯</a></li>
+                  </ul>
+                </li>
+                <span class="pull-right" tal:condition="alert"><a class="btn btn-warning" href="${alert_url}">有路灯异常</a></span>
+                <span tal:condition="not alert"><a class="btn btn-primary" href="${view_url}">一切正常</a></span>
+              </ul>
+              
+              <ul class="nav pull-right">
+                <span tal:condition="logged_in">
+                  <a class="btn btn-primary" href="${logout_url}">退出</a>
+                </span>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+</div><!-- /.navbar-wrapper -->
+    
+
+<div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="${request.static_url('streetlight:static/img/1.jpg')}" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>显眼的路灯故障警报</h1>
+              <p class="lead">当有运行异常的路灯时，系统能够在你访问系统的第一时间让你知道. 显眼的提醒按钮，让你那么容易错过。点击提醒按钮，就能直接查看到异常路灯运行状况信息，方便您安排检查修理计划。</p>
+              <span tal:condition="not logged_in"><a class="btn btn-large btn-primary" href="${login_url}">登录</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="${request.static_url('streetlight:static/img/3.jpg')}" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>方便的查看搜索功能</h1>
+              <p class="lead">你可以根据需要查看所有路灯信息，也可以根据多种方式查找到特定路灯，让你方便查看路灯运行状况信息，以及修改路灯信息。</p>
+              <span tal:condition="not logged_in"><a class="btn btn-large btn-primary" href="${login_url}">登录</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="${request.static_url('streetlight:static/img/2.jpg')}" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>全面的权限管理以及身份验证</h1>
+              <p class="lead">系统提供完善的权限管理和身份验证功能。根据设置用户组，即可配置用户组权限，保证了信息的安全。</p>
+              <span tal:condition="not logged_in"><a class="btn btn-large btn-primary" href="${login_url}">登录</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+
+
+ 
+<br /><br />
+<footer>
+      <p class="text-center">&copy; 2013 Company, Inc. &middot; <a href="#">Made By 4091503 黄恒</a></p>
+  </footer>
+
+    
+</body>
+</html>
+

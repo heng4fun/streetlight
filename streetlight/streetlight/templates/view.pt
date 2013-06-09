@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>查看搜索路灯信息</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  <meta name="keywords" content="python web application" />
+  <meta name="description" content="pyramid web application" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap-responsive.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <script src="${request.static_url('streetlight:static/jquery.js')}"></script>
+  <script src="${request.static_url('streetlight:static/bootstrap.min.js')}"></script>
+</head>
+
+<body>
+<br />
+<div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="${home_url}">城市路灯管理系统</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="${home_url}">首页</a></li>
+                <li><a href="${view_url}">查看&搜索</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理 <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">管理员</li>
+                    <li><a href="${admin_url}">查看所有管理员</a></li>
+                    <li><a href="${add_admin_url}">添加管理员</a></li>
+                    <li><a href="${edit_admin_url}">修改账户信息</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">路灯</li>
+                    <li><a href="${add_streetlight_url}">添加路灯</a></li>
+                  </ul>
+                </li>
+                <span class="pull-right" tal:condition="alert"><a class="btn btn-warning" href="${alert_url}">有路灯异常</a></span>
+                <span tal:condition="not alert"><a class="btn btn-primary" href="${view_url}">一切正常</a></span>
+              </ul>
+              
+              <ul class="nav pull-right">
+                <span tal:condition="logged_in">
+                  <a class="btn btn-primary" href="${logout_url}">退出</a>
+                </span>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+</div><!-- /.navbar-wrapper -->
+    
+    <div class="text-center">
+    
+          <form  class="form-search" action="${search_url}" method="post">
+            <select name="search_way">
+              <option value="id">ID</option>
+              <option value="sn">SN</option>
+              <option value="location">区域</option>
+            </select>
+            <div class="input-append">
+              <input id="appendedInputButton" name="keyword" >
+            <input type="submit" class="btn" name="search_form" value="Search">
+            </div>
+          </form>
+   </div>
+        
+
+    
+   
+        <table border="1" class="table table-condensed">
+          <tr>
+            <th>id</th>
+            <th>sn</th>
+            <th>电压</th>
+            <th>电流</th>
+            <th>区域</th>
+            <th>状态</th>
+            <th>安装时间</th>
+            <th>备注</th>
+            <th>操作</th>
+          </tr>
+          <div  tal:repeat="streetlight all_streetlights">
+            <tr>
+              <form action="${edit_streetlight}" method="post">
+                <input type="hidden" name='id' value="${streetlight.id}">
+                <input type="hidden" name='sn' value="${streetlight.sn}">
+                <input type="hidden" name='location' value="${streetlight.location}">
+                <input type="hidden" name='remark' value="${streetlight.remark}" >
+                <td>${streetlight.id}</td> 
+                <td>${streetlight.sn}</td> 
+                <td>${streetlight.voltage}</td> 
+                <td>${streetlight.current}</td> 
+                <td>${streetlight.location}</td>
+                <span tal:condition="streetlight.status"><td>Good</td></span>
+                <span tal:condition="not streetlight.status"><td>Unnormal</td></span>  
+                <td>${streetlight.installation_time}</td>
+                <td>${streetlight.remark}</td> 
+                <td><input type="submit" name="edit.submitted" value="修改"> <input type="submit" name="delete.submitted" value="删除"></td>
+            </form>
+            </tr>
+          </div>
+        </table>  
+  
+  <footer>
+      <p class="text-center">&copy; 2013 Company, Inc. &middot; <a href="#">Made By 4091503 黄恒</a></p>
+  </footer>
+
+</body>
+</html>

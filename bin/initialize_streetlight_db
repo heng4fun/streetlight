@@ -1,0 +1,9 @@
+#!/home/just4fun/bishe/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'streetlight==0.0','console_scripts','initialize_streetlight_db'
+__requires__ = 'streetlight==0.0'
+import sys
+from pkg_resources import load_entry_point
+
+sys.exit(
+   load_entry_point('streetlight==0.0', 'console_scripts', 'initialize_streetlight_db')()
+)

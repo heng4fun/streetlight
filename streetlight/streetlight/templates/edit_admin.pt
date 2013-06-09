@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>修改管理员信息</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  <meta name="keywords" content="python web application" />
+  <meta name="description" content="pyramid web application" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="${request.static_url('streetlight:static/bootstrap-responsive.min.css')}" type="text/css" media="screen" charset="utf-8" />
+  <script src="${request.static_url('streetlight:static/jquery.js')}"></script>
+  <script src="${request.static_url('streetlight:static/bootstrap.min.js')}"></script>
+</head>
+
+<body>
+<br />
+<div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="${home_url}">城市路灯管理系统</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="${home_url}">首页</a></li>
+                <li><a href="${view_url}">查看&搜索</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理 <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">管理员</li>
+                    <li><a href="${admin_url}">查看所有管理员</a></li>
+                    <li><a href="${add_admin_url}">添加管理员</a></li>
+                    <li><a href="${edit_admin_url}">修改账户信息</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">路灯</li>
+                    <li><a href="${add_streetlight_url}">添加路灯</a></li>
+                  </ul>
+                </li>
+                <span class="pull-right" tal:condition="alert"><a class="btn btn-warning" href="${alert_url}">有路灯异常</a></span>
+                <span tal:condition="not alert"><a class="btn btn-primary" href="${view_url}">一切正常</a></span>
+              </ul>
+              
+              <ul class="nav pull-right">
+                <span tal:condition="logged_in">
+                  <a class="btn btn-primary" href="${logout_url}">退出</a>
+                </span>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+</div><!-- /.navbar-wrapper -->
+      
+    
+    <div class="container">
+      <form class="form-signin"  action="" method="post">
+        <h2 class="form-signin-heading">管理员：${user_name}</h2>
+        <input type="password"  placeholder="密码" name="password" ><br />
+        <select name="user_group">
+          <option value="${all_group_names[0].group_name}">用户组：${all_group_names[0].group_name}</option>
+          <option value="${all_group_names[1].group_name}">用户组：${all_group_names[1].group_name}</option>
+        </select><br />
+        <input type="submit" class="btn btn-large btn-primary" name="form.submitted" value="保存" /> 
+        <span class="text-success" tal:condition="changed">
+          <strong>管理员${user_name}已经修改 !</strong>
+        </span>
+      </form>
+    </div>
+    
+    
+    
+</body>
+</html>
